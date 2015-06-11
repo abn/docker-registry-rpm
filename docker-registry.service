@@ -1,0 +1,15 @@
+[Unit]
+Description=Docker Registry
+Documentation=https://docs.docker.com/registry/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=docker-registry
+Group=docker-registry
+ExecStart=/usr/bin/docker-registry /etc/docker-registry.yml
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
