@@ -10,6 +10,7 @@ Group=docker-registry
 ExecStart=/usr/bin/docker-registry /etc/docker-registry.yml
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
