@@ -4,7 +4,7 @@
 %define go_package_src %{go_path}/src/%{go_package}
 
 Name:           docker-registry
-Version:        2.0.1
+Version:        2.6.2
 Release:        1%{?dist}
 Summary:        Docker Registry
 
@@ -34,13 +34,13 @@ export GOPATH=%{go_path}
 export PATH=${GOPATH}/bin:${PATH}
 go get github.com/tools/godep github.com/golang/lint/golint
 cd %{go_package_src}
-GOPATH=`godep path`:${GOPATH} make PREFIX=%{go_path} VERSION=%{version} binaries
+GOPATH=${GOPATH} make PREFIX=%{go_path} VERSION=%{version} binaries
 
 %install
 install -D %{go_path}/bin/registry %{buildroot}/%{_bindir}/%{name}
 
 install -d %{buildroot}/%{_sysconfdir}
-install cmd/registry/config.yml %{buildroot}/%{_sysconfdir}/%{name}.yml
+install cmd/registry/config-dev.yml %{buildroot}/%{_sysconfdir}/%{name}.yml
 
 install -d %{buildroot}/%{_unitdir}
 install %{SOURCE1} %{buildroot}/%{_unitdir}
@@ -59,7 +59,7 @@ exit 0
 
 %preun
 %systemd_preun %{name}.service
-userdel %{name} && groupdel %{name}
+userdel %{name}
 
 %postun
 %systemd_postun_with_restart %{name}.service
@@ -70,7 +70,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %attr(755, root, root) %{_sysconfdir}/%{name}.yml
-%{_unitdir}/%{name}.service
+%attr(644, root, root) %{_unitdir}/%{name}.service
 %attr(755, root, root) %{_bindir}/%{name}
 
 %doc AUTHORS LICENSE MAINTAINERS README.md
