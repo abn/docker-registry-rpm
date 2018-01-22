@@ -1,5 +1,7 @@
 # Docker Registry (v2): RPM Packaging
 
+**NOTE:** This is here for specific use cases only. The Fedora project now provides the [docker-distribution](https://src.fedoraproject.org/rpms/docker-distribution) package via the official repositories.
+
 RPM packaging for [docker registry (v2)](https://github.com/docker/distribution). This package is built and hosted using [Travis CI](https://travis-ci.com) and [Fedora Copr](https://copr.fedorainfracloud.org/) as described in the [RPM Build Flow](https://gist.github.com/abn/daf262e7e454509df1429c87068923d1).
 
 You can use this package by enabling the copr repository at [abn/docker-registry](https://copr.fedorainfracloud.org/coprs/abn/docker-registry/) as described [here](https://gist.github.com/abn/daf262e7e454509df1429c87068923d1#using-packages-in-copr-repository).
